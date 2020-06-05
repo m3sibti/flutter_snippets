@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:xpracapp/ui/common/constants.dart';
+
+class ContactScreen extends StatefulWidget {
+  @override
+  _ContactScreenState createState() => _ContactScreenState();
+}
+
+class _ContactScreenState extends State<ContactScreen> {
+  final _contacts = _dummyData();
+  final _selection = ValueNotifier<Contact>(null);
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, dimens) {
+        if (dimens.maxWidth >= kTabletBreakpoint) {
+          const kListViewWidth = 300.0;
+          return Row(
+            children: [
+              Container(
+                width: kListViewWidth,
+                child: buildListView((val) {
+                  _selection.value = val;
+                }),
+              ),
+              VerticalDivider(
+                width: 0,
+              ),
+              Expanded(
+                  child: ValueListenableBuilder<Contact>(
+                valueListenable: _selection,
+                builder: (context, contact, child) {
+                  if (contact == null) {
+                    return Scaffold(
+                      appBar: AppBar(
+                        title: Text('Details'),
+                      ),
+                      body: Center(
+                        child: Text('Nothing Selected'),
+                      ),
+                    );
+                  }
+                  return ContactDetails(contact: contact);
+                },
+              ))
+            ],
+          );
+        }
+        return buildListView((val) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => ContactDetails(
+                    contact: val,
+                  )));
+        });
+      },
+    );
+  }
+
+  Widget buildListView(ValueChanged<Contact> onSelection) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text('Contacts'),
+      ),
+      body: ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+                height: 0,
+              ),
+          itemCount: _contacts.length,
+          itemBuilder: (context, idx) {
+            final _contact = _contacts[idx];
+            return ListTile(
+              leading: Icon(Icons.person),
+              title: Text(_contact.name),
+              subtitle: Text(_contact.email),
+              onTap: () => onSelection(_contact),
+            );
+          }),
+    );
+  }
+}
+
+List<Contact> _dummyData() {
+  return [
+    Contact('John Doe', 'johndoe@app.com'),
+    Contact('Susan Smith', 'susan@app.com'),
+    Contact('James Hatfield', 'jameshhh@app.com'),
+    Contact('Steve Jobs', 'steve@apple.com'),
+    Contact('Bill Gates', 'bill@microsoft.com'),
+    Contact('Elon Musk', 'emusk@tesla.com'),
+    Contact('Jack Ma', 'jackma@alibaba.com'),
+  ];
+}
+
+class Contact {
+  final String name;
+  final String email;
+
+  Contact(this.name, this.email);
+}
+
+class ContactDetails extends StatelessWidget {
+  final Contact contact;
+
+  ContactDetails({Key key, @required this.contact}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details'),
+        centerTitle: false,
+      ),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: Icon(Icons.person_outline),
+            title: Text('Name'),
+            subtitle: Text(contact.name),
+          ),
+          ListTile(
+            leading: Icon(Icons.email),
+            title: Text('Email'),
+            subtitle: Text(contact.email),
+          ),
+        ],
+      ),
+    );
+  }
+}
