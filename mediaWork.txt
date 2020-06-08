@@ -1,3 +1,6 @@
 // Audio player
 // check the below link for latest instructions
 https://pub.dev/packages/audioplayers 
+
+// Video player
+https://pub.dev/packages/video_player
