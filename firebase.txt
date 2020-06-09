@@ -8,3 +8,7 @@ Firebase Flutter Plugins
 
 Flutter Docs for Firebase
 - https://flutter.dev/docs/development/data-and-backend/firebase
+
+IOS Instructions:
+- keep your pod file updated
+- also check google_signin_auth plugin instructions of iOS before enabling it in your app
