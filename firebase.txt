@@ -1,0 +1,10 @@
+# Details can be find here on two links 
+
+Initialize your app (official docs)
+- https://firebase.google.com/docs/flutter/setup
+
+Firebase Flutter Plugins
+- https://github.com/FirebaseExtended/flutterfire
+
+Flutter Docs for Firebase
+- https://flutter.dev/docs/development/data-and-backend/firebase
