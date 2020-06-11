@@ -2,8 +2,10 @@
 
 ## Info 
 Currently this repository have following **Alert Dialog** examples:
+<!-- TOC -->
  - Simple Alert Dialog
  - Alert Dialogs with TextField (Phone#)
+ - 
  
 ## Examples
  ### **1. Simple Alert Dialog** 
@@ -132,6 +134,6 @@ Currently this repository have following **Alert Dialog** examples:
       }
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMzM1NDgxMDgsMzk5MDYwNTMwLDE3ND
-I5MTU1MjRdfQ==
+eyJoaXN0b3J5IjpbMjkzMzY0ODM2LDM5OTA2MDUzMCwxNzQyOT
+E1NTI0XX0=
 -->
