@@ -3,12 +3,12 @@
 ## Info 
 Currently this repository have following **Alert Dialog** examples:
 <!-- TOC -->
- - [Simple Alert Dialog](###1-simple-alert-dialog)
- - [Alert Dialogs with TextField (Phone#)](###2-alert-dialog-with-textField)
+ - [Simple Alert Dialog](###simple-alert-dialog)
+ - [Alert Dialogs with TextField (Phone#)](###alert-dialog-with-textField)
  <!-- /TOC -->
 ## Examples
 
- ### 1. Simple Alert Dialog
+ ### Simple Alert Dialog
 
     void myDialog(BuildContext ctx){
         final _title = Text('Authentication');
@@ -60,7 +60,7 @@ Currently this repository have following **Alert Dialog** examples:
         showDialog(context: ctx, builder: (_) => dialog);
     }
 ***
- ### 2. Alert Dialog With TextField
+ ### Alert Dialog With TextField
 
      void _phoneNumberSignIn(BuildContext ctx) {
         final _pNoController = TextEditingController();
@@ -135,6 +135,6 @@ Currently this repository have following **Alert Dialog** examples:
       
 ***
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxMDY2OTY5NCwzOTkwNjA1MzAsMTc0Mj
-kxNTUyNF19
+eyJoaXN0b3J5IjpbMjQ2ODA5MDM0LDM5OTA2MDUzMCwxNzQyOT
+E1NTI0XX0=
 -->
