@@ -3,7 +3,8 @@
 ## Info 
 Currently this repository have following **Alert Dialog** examples:
 
- - Alert Dialog h 
+ - Simple Alert Dialog
+ - Alert Dialogs with TextField (Phone#) 
 
 ## Examples
  ### **1. Simple Alert Dialog**
@@ -132,5 +133,5 @@ Currently this repository have following **Alert Dialog** examples:
       }
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2NTQzNTg1N119
+eyJoaXN0b3J5IjpbMTc0MjkxNTUyNF19
 -->
