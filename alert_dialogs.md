@@ -135,6 +135,5 @@ Currently this repository have following **Alert Dialog** examples:
       
 ***
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNjY2OTk5NCwzOTkwNjA1MzAsMTc0Mj
-kxNTUyNF19
+eyJoaXN0b3J5IjpbMTIzNjY2OTk5NF19
 -->
