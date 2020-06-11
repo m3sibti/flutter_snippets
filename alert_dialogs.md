@@ -53,6 +53,7 @@
     }
 
  ### **1. Simple Alert Dialog**
+
      void _phoneNumberSignIn(BuildContext ctx) {
         final _pNoController = TextEditingController();
         final _title = Text('Authentication');
@@ -125,5 +126,5 @@
       }
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjMyNzAxNDI4XX0=
+eyJoaXN0b3J5IjpbLTk5MzE3ODIzNF19
 -->
