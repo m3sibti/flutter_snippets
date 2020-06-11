@@ -4,21 +4,26 @@
 Currently this repository have following **Alert Dialog** examples:
 
 <!-- TOC -->
-- [Markdown Navigation](#markdown-navigation)
+ 1. [Markdown Navigation](#markdown-navigation)
     - [Features](#features)
     - [Installation](#installation)
     - [Usage](#usage)
     - [What's New?](#whats-new)
     - [Question](#question)
     - [License](#license)
-    - [Links](#s1)
+    - [Links](#links-e)
 <!-- /TOC -->
 
- - Simple Alert Dialog
- - Alert Dialogs with TextField (Phone#)
+ 2. Simple Alert Dialog
+ 3. Alert Dialogs with TextField (Phone#)
  
 ## Examples
- ### Simple Alert Dialog {#custom-id}
+
+ ### Simpl
+
+ 4. List item
+
+e Alert Dialog
 
     void myDialog(BuildContext ctx){
         final _title = Text('Authentication');
@@ -70,7 +75,7 @@ Currently this repository have following **Alert Dialog** examples:
         showDialog(context: ctx, builder: (_) => dialog);
     }
 
- ### **2. Alert Dialog With TextField**
+ ### 2. Alert Dialog With TextField
 
      void _phoneNumberSignIn(BuildContext ctx) {
         final _pNoController = TextEditingController();
@@ -142,8 +147,8 @@ Currently this repository have following **Alert Dialog** examples:
               );
         showDialog(context: ctx, builder: (_) => dialog);
       }
-## Links E {#s1}
+### **3.  Links E
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzI0MzY3ODIyLDM5OTA2MDUzMCwxNzQyOT
-E1NTI0XX0=
+eyJoaXN0b3J5IjpbLTE1MjU1NTk1MzYsMzk5MDYwNTMwLDE3ND
+I5MTU1MjRdfQ==
 -->
