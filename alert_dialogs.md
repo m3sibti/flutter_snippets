@@ -3,10 +3,10 @@
 ## Info 
 Currently this repository have following **Alert Dialog** examples:
  - Simple Alert Dialog
- - [Alert Dialogs with TextField (Phone#)])(#SimpleAlertDialog)
+ - Alert Dialogs with TextField (Phone#)
  
 ## Examples
- ### **1. Simple Alert Dialog**
+ ### **1. Simple Alert Dialog** 
 
     void myDialog(BuildContext ctx){
         final _title = Text('Authentication');
@@ -132,6 +132,6 @@ Currently this repository have following **Alert Dialog** examples:
       }
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1NjE0MjMzOSwzOTkwNjA1MzAsMTc0Mj
-kxNTUyNF19
+eyJoaXN0b3J5IjpbLTEyMzM1NDgxMDgsMzk5MDYwNTMwLDE3ND
+I5MTU1MjRdfQ==
 -->
