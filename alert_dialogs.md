@@ -52,7 +52,7 @@
         showDialog(context: ctx, builder: (_) => dialog);
     }
 
- ### **1. Simple Alert Dialog**
+ ### **2. Alert Dialog With TextField**
 
      void _phoneNumberSignIn(BuildContext ctx) {
         final _pNoController = TextEditingController();
