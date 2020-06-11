@@ -11,7 +11,7 @@ Currently this repository have following **Alert Dialog** examples:
     - [What's New?](#whats-new)
     - [Question](#question)
     - [License](#license)
-    - [Links](#links)
+    - [Links](#s1)
 <!-- /TOC -->
 
  - Simple Alert Dialog
@@ -142,8 +142,8 @@ Currently this repository have following **Alert Dialog** examples:
               );
         showDialog(context: ctx, builder: (_) => dialog);
       }
-## Links E
+## Links E {#s1}
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3MjgwOTE3NiwzOTkwNjA1MzAsMTc0Mj
-kxNTUyNF19
+eyJoaXN0b3J5IjpbNzI0MzY3ODIyLDM5OTA2MDUzMCwxNzQyOT
+E1NTI0XX0=
 -->
