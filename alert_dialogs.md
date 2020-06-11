@@ -11,14 +11,14 @@ Currently this repository have following **Alert Dialog** examples:
     - [What's New?](#whats-new)
     - [Question](#question)
     - [License](#license)
-    - [Links](#links E)
+    - [Links](#links)
 <!-- /TOC -->
 
  - Simple Alert Dialog
  - Alert Dialogs with TextField (Phone#)
  
 ## Examples
- ### **1. Simple Alert Dialog** 
+ ### Simple Alert Dialog {#custom-id}
 
     void myDialog(BuildContext ctx){
         final _title = Text('Authentication');
@@ -144,6 +144,6 @@ Currently this repository have following **Alert Dialog** examples:
       }
 ## Links E
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1NDEzODc2NCwzOTkwNjA1MzAsMTc0Mj
+eyJoaXN0b3J5IjpbMTU3MjgwOTE3NiwzOTkwNjA1MzAsMTc0Mj
 kxNTUyNF19
 -->
