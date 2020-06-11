@@ -2,10 +2,20 @@
 
 ## Info 
 Currently this repository have following **Alert Dialog** examples:
+
 <!-- TOC -->
+- [Markdown Navigation](#markdown-navigation)
+    - [Features](#features)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [What's New?](#whats-new)
+    - [Question](#question)
+    - [License](#license)
+    - [Links](#links E)
+<!-- /TOC -->
+
  - Simple Alert Dialog
  - Alert Dialogs with TextField (Phone#)
- - 
  
 ## Examples
  ### **1. Simple Alert Dialog** 
@@ -132,8 +142,8 @@ Currently this repository have following **Alert Dialog** examples:
               );
         showDialog(context: ctx, builder: (_) => dialog);
       }
-
+## Links E
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjkzMzY0ODM2LDM5OTA2MDUzMCwxNzQyOT
-E1NTI0XX0=
+eyJoaXN0b3J5IjpbLTY1NDEzODc2NCwzOTkwNjA1MzAsMTc0Mj
+kxNTUyNF19
 -->
