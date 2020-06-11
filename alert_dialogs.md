@@ -1,5 +1,11 @@
-# Alert Dialog Example
+# Alert Dialogs
 
+## Info 
+Currently this repository have following **Alert Dialog** examples:
+
+ - Alert Dialog h 
+
+## Examples
  ### **1. Simple Alert Dialog**
 
     void myDialog(BuildContext ctx){
@@ -126,5 +132,5 @@
       }
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTkyNzk5ODJdfQ==
+eyJoaXN0b3J5IjpbLTg2NTQzNTg1N119
 -->
