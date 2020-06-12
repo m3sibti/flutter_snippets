@@ -12,3 +12,235 @@ Flutter Docs for Firebase
 IOS Instructions:
 - keep your pod file updated
 - also check google_signin_auth plugin instructions of iOS before enabling it in your app
+
+Authentication Logins:
+Get most instructions from official pages usel widgets for calling thosr functions are given below.
+- https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/example/lib/signin_page.dart
+
+
+
+#### GOOGLE SIGNIN
+After attaching and placing proper files and enabling the Google Signin from fluttefire:
+// Google SignIn
+  void googleSign() {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    _handleSignIn(_googleSignIn, _auth).then((FirebaseUser user) {
+      saveUser(user);
+    }).catchError((e) => print('\n\n\nError $e'));
+  }
+
+  Future<FirebaseUser> _handleSignIn(gSignIn, auth) async {
+    final GoogleSignInAccount googleUser = await gSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final FirebaseUser user =
+        (await auth.signInWithCredential(credential)).user;
+    print("signed in " + user.displayName);
+    return user;
+
+    // Register a user
+    /* final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      email: 'an email',
+      password: 'a password',
+    ))
+        .user;*/
+  }
+saveUser(FirebaseUser user) async {
+    final User newUser = User(user.uid, user.displayName, user.email,
+        user.photoUrl, UserLocation("0.00", "0.00"), 'fb');
+    final SharedPreferences prefs = await _prefs;
+    prefs.setStringList('user', [
+      newUser.name,
+      newUser.credId,
+      newUser.imgUrl,
+      newUser.uType
+    ]).then((bool success) {
+      if (success) {
+        prefs.setBool('isLogin', true).then((bool s) {
+          print('\n\n\n\nUser Login Successful');
+        });
+      }
+    });
+  }
+
+  void checkIfLogin() async {
+    final SharedPreferences prefs = await _prefs;
+    final bool isLogin = prefs.getBool('isLogin') ?? false;
+    print('User Already Logged In = $isLogin');
+  }
+  
+  
+  
+  
+#### Phone Number SIGN IN ##########
+- after enabling from official docs
+- using an AlertDialogBOX
+####################################
+  
+// Phone Number SignIn
+void _phoneNumberSignIn(BuildContext ctx) {
+    final _pNoController = TextEditingController();
+    final _title = Text('Authentication');
+    final _content = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('Please verify your phone number'),
+        Container(
+          padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+          child: TextField(
+            controller: _pNoController,
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: '+xxxxxxxxxxxx',
+            ),
+          ),
+        ),
+      ],
+    );
+    final _actionTexts = [
+      Text('Cancel'),
+      Text('Verify'),
+    ];
+
+    _closeNavigator() {
+      Navigator.of(ctx).pop();
+    }
+
+    _verifyPhoneNum() async {
+      setState(() {
+        _message = '';
+      });
+      final PhoneVerificationCompleted verificationCompleted =
+          (AuthCredential phoneAuthCredential) {
+        _auth.signInWithCredential(phoneAuthCredential);
+        setState(() {
+          _message = 'Received phone auth credential: $phoneAuthCredential';
+        });
+      };
+
+      final PhoneVerificationFailed verificationFailed =
+          (AuthException authException) {
+        setState(() {
+          _message =
+              'Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}';
+        });
+      };
+
+      final PhoneCodeSent codeSent =
+          (String verificationId, [int forceResendingToken]) async {
+        _closeNavigator();
+        //Scaffold.of(context).showSnackBar(const SnackBar(
+        //content: Text('Please check your phone for the verification code.'),
+        //));
+        print('Code Sent');
+        _verificationId = verificationId;
+
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text('Verify Number'),
+                content: Container(
+                  padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                  child: TextField(
+                    controller: _smsController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: '+xxxxxxxxxxxx',
+                    ),
+                  ),
+                ),
+                actions: [
+                  FlatButton(
+                    child: Text('Verify'),
+                    onPressed: () {
+                      _signInWithPhoneNumber();
+                      _closeNavigator();
+                    },
+                  )
+                ],
+              );
+            });
+      };
+
+      final PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+          (String verificationId) {
+        _verificationId = verificationId;
+      };
+
+      await _auth.verifyPhoneNumber(
+          phoneNumber: _pNoController.text,
+          timeout: const Duration(seconds: 5),
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+
+      print('\n$_message\n');
+    }
+
+    final _cActions = [
+      CupertinoDialogAction(
+        child: _actionTexts[0],
+        onPressed: () => _closeNavigator(),
+      ),
+      CupertinoDialogAction(
+        child: _actionTexts[1],
+        onPressed: () => _verifyPhoneNum(),
+      ),
+    ];
+    final _aActions = [
+      FlatButton(
+        child: _actionTexts[0],
+        onPressed: () => _closeNavigator(),
+      ),
+      FlatButton(
+        child: _actionTexts[1],
+        onPressed: () => _verifyPhoneNum(),
+      ),
+    ];
+
+    var dialog = Platform.isIOS
+        ? CupertinoAlertDialog(
+            title: _title,
+            content: _content,
+            actions: _cActions,
+          )
+        : AlertDialog(
+            title: _title,
+            content: _content,
+            actions: _aActions,
+            elevation: 24,
+          );
+    showDialog(context: ctx, builder: (_) => dialog);
+  }
+
+// Example code of how to sign in with phone.
+void _signInWithPhoneNumber() async {
+    final AuthCredential credential = PhoneAuthProvider.getCredential(
+      verificationId: _verificationId,
+      smsCode: _smsController.text,
+    );
+    final FirebaseUser user =
+        (await _auth.signInWithCredential(credential)).user;
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert(user.uid == currentUser.uid);
+    setState(() {
+      if (user != null) {
+        _message = 'Successfully signed in, uid: ' + user.uid;
+        saveUser(user);
+      } else {
+        _message = 'Sign in failed';
+      }
+    });
+  }
