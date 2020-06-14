@@ -1,139 +1,45 @@
-# Alert Dialogs
 
-## Info 
-Currently this repository have following **Alert Dialog** examples:
-<!-- TOC -->
- - [Simple Alert Dialog](#simple-alert-dialog)
- - [Alert Dialogs with TextField (Phone#)](#alert-dialog-with-textfield)
- <!-- /TOC -->
-## Examples
+# GPU related information
 
- ### Simple Alert Dialog
+The following library is helpful for monitoring in GPU utilization, you can call it in custom callbacks `on_batch_begin/end`
+https://github.com/anderskm/gputil
 
-    void myDialog(BuildContext ctx){
-        final _title = Text('Authentication');
-        final _content = Text('Please verify your phone number');
-        final _actionTexts = [
-          Text('Cancel'),
-          Text('Verify'),
-        ];
-        _closeNavigator() {
-          Navigator.of(ctx).pop();
-        }
-        _verifyPhoneNum() {
-          print('Phone Number Verification');
-          Navigator.of(ctx).pop();
-        }
-        final _cActions = [
-          CupertinoDialogAction(
-            child: _actionTexts[0],
-            onPressed: () => _closeNavigator(),
-          ),
-          CupertinoDialogAction(
-            child: _actionTexts[1],
-            onPressed: () => _verifyPhoneNum(),
-          ),
-        ];
-        final _aActions = [
-          FlatButton(
-            child: _actionTexts[0],
-            onPressed: () => _closeNavigator(),
-          ),
-          FlatButton(
-            child: _actionTexts[1],
-            onPressed: () => _verifyPhoneNum(),
-          ),
-        ];
+**Calculate  model memory usageeras)**
     
-        var dialog = Platform.isIOS
-            ? CupertinoAlertDialog(
-                title: _title,
-                content: _content,
-                actions: _cActions,
-              )
-            : AlertDialog(
-                title: _title,
-                content: _content,
-                actions: _aActions,
-                elevation: 24,
-              );
-        showDialog(context: ctx, builder: (_) => dialog);
-    }
-***
- ### Alert Dialog With TextField
+    def get_model_memory_usage(batch_size, model):
+        shapes_mem_count = 0
+        internal_model_mem_count = 0
+        for l in model.layers:
+            layer_type = l.__class__.__name__
+            if layer_type == 'Model':
+                internal_model_mem_count += get_model_memory_usage(batch_size, l)
+            single_layer_mem = 1
+            for s in l.output_shape:
+                if s is None:
+                    continue
+                single_layer_mem *= s
+            shapes_mem_count += single_layer_mem
+    
+        trainable_count = np.sum([K.count_params(p) for p in model.trainable_weights])
+        non_trainable_count = np.sum([K.count_params(p) for p in model.non_trainable_weights])
+    
+        number_size = 4.0
+        if K.floatx() == 'float16':
+             number_size = 2.0
+        if K.floatx() == 'float64':
+             number_size = 8.0
+    
+        total_memory = number_size*(batch_size*shapes_mem_count + trainable_count + non_trainable_count)
+        mbytes = np.round(total_memory / (1024.0 ** 2), 3) + internal_model_mem_count
+        #  gbytes = np.round(total_memory / (1024.0 ** 3), 3) + internal_model_mem_count
+        # return # gbytes
+        print(f"Model Types = {number_size}, {K.floatx()}")
+        print(f"Batch size = {batch_size}")
+        print(f"Shapes Memory = {shapes_mem_count}")
+        print(f"Params: \n    - Trainable = {trainable_count}\n    - Non-Trainable {non_trainable_count}")
+        print(f"\nTotal Memory Required = {total_memory} bytes, {mbytes}MB")
+        print(f"Approx, Actual Memory Required = {mbytes*3}MB, (Memory x 3) 3 for grads and momentum variables")
 
-     void _phoneNumberSignIn(BuildContext ctx) {
-        final _pNoController = TextEditingController();
-        final _title = Text('Authentication');
-        final _content = Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Please verify your phone number'),
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
-              child: TextField(
-                controller: _pNoController,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: '+xxxxxxxxxxxx',
-                ),
-              ),
-            ),
-          ],
-        );
-        final _actionTexts = [
-          Text('Cancel'),
-          Text('Verify'),
-        ];
-        _closeNavigator() {
-          Navigator.of(ctx).pop();
-        }
-    
-        _verifyPhoneNum() {
-          print('Phone Number = ${_pNoController.text}');
-          Navigator.of(ctx).pop();
-        }
-    
-        final _cActions = [
-          CupertinoDialogAction(
-            child: _actionTexts[0],
-            onPressed: () => _closeNavigator(),
-          ),
-          CupertinoDialogAction(
-            child: _actionTexts[1],
-            onPressed: () => _verifyPhoneNum(),
-          ),
-        ];
-        final _aActions = [
-          FlatButton(
-            child: _actionTexts[0],
-            onPressed: () => _closeNavigator(),
-          ),
-          FlatButton(
-            child: _actionTexts[1],
-            onPressed: () => _verifyPhoneNum(),
-          ),
-        ];
-    
-        var dialog = Platform.isIOS
-            ? CupertinoAlertDialog(
-                title: _title,
-                content: _content,
-                actions: _cActions,
-              )
-            : AlertDialog(
-                title: _title,
-                content: _content,
-                actions: _aActions,
-                elevation: 24,
-              );
-        showDialog(context: ctx, builder: (_) => dialog);
-      }
-      
-***
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNjY2OTk5NF19
+eyJoaXN0b3J5IjpbLTExNTAzMDA5MzgsMTIzNjY2OTk5NF19
 -->
