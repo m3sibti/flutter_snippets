@@ -9,6 +9,9 @@ Firebase Flutter Plugins
 Flutter Docs for Firebase
 - https://flutter.dev/docs/development/data-and-backend/firebase
 
+- Information about Firebase Token bs AuthID Token
+https://stackoverflow.com/questions/39157236/firebase-cloud-messaging-auth-tokens-vs-registration-token/39157528#39157528
+
 IOS Instructions:
 - keep your pod file updated
 - also check google_signin_auth plugin instructions of iOS before enabling it in your app
