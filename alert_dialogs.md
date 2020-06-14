@@ -4,7 +4,7 @@
 The following library is helpful for monitoring in GPU utilization, you can call it in custom callbacks `on_batch_begin/end`
 https://github.com/anderskm/gputil
 
-**Calculate  model memory usageeras)**
+**Calculate Keras's Model Memory Usage:**
     
     def get_model_memory_usage(batch_size, model):
         shapes_mem_count = 0
@@ -41,5 +41,5 @@ https://github.com/anderskm/gputil
         print(f"Approx, Actual Memory Required = {mbytes*3}MB, (Memory x 3) 3 for grads and momentum variables")
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTAzMDA5MzgsMTIzNjY2OTk5NF19
+eyJoaXN0b3J5IjpbMTQzNjM4OTg0NCwxMjM2NjY5OTk0XX0=
 -->
