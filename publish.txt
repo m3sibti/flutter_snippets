@@ -15,7 +15,7 @@ Create keystore
 - password must be of your keystore account
 - beware to check the alias
 command:
-keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 1000 -alias key
+keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 20000 -alias key
 
 - copy paste your key in documents and rename to your choice
 - create a key.properties in ./android and add the information about your key here
