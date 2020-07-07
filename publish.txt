@@ -1,0 +1,45 @@
+Get Icons from:
+- use pixabay for getting free images
+- create icons using: https://appicon.co/
+
+Check Android Manifest xml to place your required thing there
+android/app/src/main/...
+
+Activate flutter command in PC
+source ~/.bash_profile
+
+Create keystore
+- jks = java keystore
+- klag = key algorithm
+- validity in years
+- password must be of your keystore account
+- beware to check the alias
+command:
+keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 1000 -alias key
+
+- copy paste your key in documents and rename to your choice
+- create a key.properties in ./android and add the information about your key here
+storePassword=
+keyPassword=
+keyAlias=
+storeFile=/x/x/x
+
+Now in android>build.gradle
+write this above android {}
+def keystorePropertiesFile = rootProject.file("key.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+Now above buildtypes {} type following:
+signingConfigs{
+relase { keyAlias keystoreProperties['keyAlias']
+keyPassword keystoreProperties['keyPassword']
+storeFile file(keystoreProperties['storeFile'])
+storePassword keystoreProperties['storePassword']
+}
+}
+
+Change the signingConfig value to signingConfigs.release in buildtypes
+flutter build apk --release
+
+Now login to your google account and publish your app with details and screenshots...
